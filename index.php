@@ -1,7 +1,11 @@
 <?php
 	require 'app/FabricaDeClientes.php';
 	
-	if($_POST)
+	if ($_GET) {
+
+		$clientes[] = unserialize($_GET['cliente']);
+	}
+	elseif($_POST)
 	{
 		$clientes = [];
 
@@ -70,7 +74,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Cadastro de clientes</a>
+          <a class="navbar-brand" href="http://localhost:8081/projetoOO/">Cadastro de clientes</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           
@@ -103,7 +107,10 @@
 				<?php $i = 0; ?>
 				<?php foreach($clientes as $cliente) :?>
 					<tr>
-					  <td><?= $cliente->getNome() ?> <input type="hidden" name="nome[<?= $i; ?>]" value="<?= $cliente->getNome() ?>"> </td>
+					   <td>
+					   <!-- <a href='http://localhost:8081/projetoOO/?nome=<?= $cliente->getNome() ?>&email=<?= $cliente->getEmail() ?>&telefone=<?= $cliente->getTelefone() ?>&endereco=<?= $cliente->getEndereco() ?>&cpf=<?= $cliente->getCpf() ?>'>  -->
+					   <a href= 'http://localhost:8081/projetoOO/?cliente=<?= serialize($cliente) ?>' >
+					   <?= $cliente->getNome() ?> <input type="hidden" name="nome[<?= $i; ?>]" value="<?= $cliente->getNome() ?>"> </a> </td> 
 					  <td><?= $cliente->getEmail() ?> <input type="hidden" name="email[<?= $i; ?>]" value="<?= $cliente->getEmail() ?>"> </td>
 					  <td><?= $cliente->getTelefone() ?> <input type="hidden" name="telefone[<?= $i; ?>]" value="<?= $cliente->getTelefone() ?>"></td>
 					  <td><?= $cliente->getEndereco() ?> <input type="hidden" name="endereco[<?= $i; ?>]" value="<?= $cliente->getEndereco() ?>"></td>
